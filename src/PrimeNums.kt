@@ -10,9 +10,9 @@ fun checkPrime(n: Int, primes: List<Int>): Boolean {
 	return true
 }
 
-fun printPrimeNums(start: Int = 2, stop: Int = Int.MAX_VALUE) {
+fun printPrimeNums(stop: Int = Int.MAX_VALUE) {
 	val primes: MutableList<Int> = mutableListOf<Int>()
-	for (i: Int in maxOf(start, 2) .. stop) {
+	for (i: Int in 2 .. stop) {
 		if (checkPrime(i, primes)) {
 			println(i)
 			primes.add(i)
@@ -20,10 +20,25 @@ fun printPrimeNums(start: Int = 2, stop: Int = Int.MAX_VALUE) {
 	}
 }
 
+fun printPrimePairs(stop: Int = Int.MAX_VALUE) {
+	val primes: MutableList<Int> = mutableListOf<Int>()
+	for (i: Int in 2 .. stop) {
+		if (checkPrime(i, primes)) {
+			primes.add(i)
+		}
+		if (i in primes && i - 2 in primes) {
+			println("($i, ${i - 2})")
+		}
+	}
+}
+
 fun main() {
-	print("Start Value: ")
-	val start: Int = readln().toIntOrNull() ?: 2
 	print("End value: ")
 	val stop: Int = readln().toIntOrNull() ?: Int.MAX_VALUE
-	printPrimeNums(start, stop)
+	print("Pairs/Nums? ")
+	if (readln().lowercase().startsWith("n")) {
+		printPrimeNums(stop)
+	} else {
+		printPrimePairs(stop)
+	}
 }
