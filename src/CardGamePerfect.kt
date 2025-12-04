@@ -1,10 +1,6 @@
 fun kgv(vararg nums: Int): Int { // kgV is german for Kleinstes gemeinsames Vielfaches (Least common multiple)
 	val max_num = nums.maxOrNull() ?: error("no numbers")
-	var max_kgv = 1
-	for (num: Int in nums) {
-		max_kgv *= num
-	}
-	for (currentKgv: Int in max_num .. max_kgv step max_num) {
+	for (currentKgv: Int in max_num .. Int.MAX_VALUE step max_num) {
 		var possible = true
 		for (num: Int in nums) {
 			if (currentKgv % num != 0) {
@@ -19,5 +15,7 @@ fun kgv(vararg nums: Int): Int { // kgV is german for Kleinstes gemeinsames Viel
 }
 
 fun main() {
-	println(kgv(2, 6))
+	for (i in 2..10) {
+		println("up to $i players: ${kgv(*(2 .. i).toList().toIntArray())}")
+	}
 }
