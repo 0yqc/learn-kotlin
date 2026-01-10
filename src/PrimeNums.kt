@@ -1,8 +1,19 @@
+import kotlin.math.sqrt
+
 fun checkPrime(n: Int, primes: List<Int>): Boolean {
 	for (i: Int in primes) {
 		if (i * i > n) {
 			break
 		}
+		if (n % i == 0) {
+			return false
+		}
+	}
+	return true
+}
+
+fun checkPrime(n: Int): Boolean {
+	for (i: Int in 2 .. sqrt(n.toDouble()).toInt()) {
 		if (n % i == 0) {
 			return false
 		}
